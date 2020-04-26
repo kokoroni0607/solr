@@ -1,0 +1,8 @@
+server:
+  port: 9999
+spring:
+  application:
+    name: solrdemo
+  data:
+    solr:
+      host: http://localhost:8983/solr/test
