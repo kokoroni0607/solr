@@ -1,6 +1,6 @@
 package com.creditstate.demo.service.impl;
 
-import com.creditstate.demo.entity.Account;
+import com.creditstate.demo.entity.po.Account;
 import com.creditstate.demo.service.SolrService;
 import org.springframework.stereotype.Service;
 

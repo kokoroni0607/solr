@@ -1,6 +1,6 @@
 package com.creditstate.demo.service;
 
-import com.creditstate.demo.entity.Account;
+import com.creditstate.demo.entity.po.Account;
 
 /**
  * @author weiming.zhu
