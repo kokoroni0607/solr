@@ -39,9 +39,9 @@ public class SolrController {
      * @return
      */
     @GetMapping("/addAccount")
-    public String addAccount() {
+    public String addAccount(Account account) {
         try {
-            solrClient.addBean(Account.builder().id(1).password("123456").username("test").build());
+            solrClient.addBean(account);
             solrClient.commit();
             return "success";
         } catch (IOException | SolrServerException e) {
@@ -121,6 +121,17 @@ public class SolrController {
         SolrDocument solrDocument = solrClient.getById(account.getId().toString());
         if (solrDocument != null) {
             solrClient.addBean(account);
+            solrClient.commit();
+            return "success";
+        }
+        return "false";
+    }
+
+    @GetMapping("/removeAccountById")
+    public String removeAccount(Integer id) throws IOException, SolrServerException {
+        SolrDocument solrDocument = solrClient.getById(id.toString());
+        if (solrDocument != null) {
+            solrClient.deleteById(id.toString());
             solrClient.commit();
             return "success";
         }
