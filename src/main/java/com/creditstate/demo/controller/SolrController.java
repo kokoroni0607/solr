@@ -35,6 +35,7 @@ public class SolrController {
 
     /**
      * 添加账户
+     *
      * @return
      */
     @GetMapping("/addAccount")
@@ -51,6 +52,7 @@ public class SolrController {
 
     /**
      * 根据id查询账户
+     *
      * @param id
      * @return
      */
@@ -68,6 +70,7 @@ public class SolrController {
 
     /**
      * 多条件查询账户
+     *
      * @param account
      * @param page
      * @return
@@ -106,13 +109,31 @@ public class SolrController {
         return "failed";
     }
 
+    /**
+     * 根据id修改已存在账户
+     * @param account
+     * @return
+     * @throws IOException
+     * @throws SolrServerException
+     */
+    @GetMapping("/updateAccountById")
+    public String selectAccount(Account account) throws IOException, SolrServerException {
+        SolrDocument solrDocument = solrClient.getById(account.getId().toString());
+        if (solrDocument != null) {
+            solrClient.addBean(account);
+            solrClient.commit();
+            return "success";
+        }
+        return "false";
+    }
+
     private void handleQuery(Account account, SolrQuery solrQuery) {
         if (StringUtils.isNotBlank(account.getUsername())) {
             solrQuery.set("q", "username:" + account.getUsername());
             if (account.getId() != null && account.getId() > 0) {
                 solrQuery.set("fq", "id:" + account.getId());
             }
-        }else{
+        } else {
             if (account.getId() != null && account.getId() > 0) {
                 solrQuery.set("q", "id:" + account.getId());
             }
