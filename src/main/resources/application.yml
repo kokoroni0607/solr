@@ -5,4 +5,4 @@ spring:
     name: solrdemo
   data:
     solr:
-      host: http://localhost:8983/solr/test
+      host: http://localhost:8983/solr/credit_wuhu-content
